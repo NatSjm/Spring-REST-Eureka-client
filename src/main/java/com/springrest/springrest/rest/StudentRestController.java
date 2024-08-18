@@ -24,9 +24,10 @@ public class StudentRestController {
         return theStudents;
     }
 
-    @GetMapping("/students/{studentId}")
-    public Student getStudent(@PathVariable int studentId) {
-        return theStudents.get(studentId);
+    @PostMapping("/students")
+    public Student addStudent(@RequestBody Student theStudent) {
+        theStudents.add(theStudent);
+        return theStudent;
     }
 
     @GetMapping("/students/group/{groupName}")
@@ -39,21 +40,5 @@ public class StudentRestController {
         }
         return studentsOfGroup;
     }
-    @PutMapping("/students/{studentId}")
-    public Student updateStudent(@PathVariable int studentId, @RequestBody Student theStudent) {
-        if (studentId >= theStudents.size() || studentId < 0) {
-            throw new StudentNotFoundException("Student id not found - " + studentId);
-        }
-        theStudents.set(studentId, theStudent);
-        return theStudent;
-    }
 
-    @DeleteMapping("/students/{studentId}")
-    public String deleteStudent(@PathVariable int studentId) {
-        if (studentId >= theStudents.size() || studentId < 0) {
-            throw new StudentNotFoundException("Student id not found - " + studentId);
-        }
-        theStudents.remove(studentId);
-        return "Deleted student id - " + studentId;
-    }
 }
