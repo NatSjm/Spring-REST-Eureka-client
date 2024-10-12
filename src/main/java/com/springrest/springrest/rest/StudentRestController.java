@@ -30,6 +30,7 @@ public class StudentRestController {
         return theStudent;
     }
 
+    //this method is part of homework of the Java Enterprise course
     @GetMapping("/students/group/{groupName}")
     public List<Student> getStudentsOfGroup(@PathVariable String groupName) {
         List<Student> studentsOfGroup = new ArrayList<>();
@@ -40,5 +41,14 @@ public class StudentRestController {
         }
         return studentsOfGroup;
     }
+
+    @GetMapping("/students/{studentId}")
+    public Student getStudent(@PathVariable int studentId) {
+        if ( (studentId >= theStudents.size()) || (studentId < 0)) {
+            throw new StudentNotFoundException("Student id not found - " + studentId);
+        }
+        return theStudents.get(studentId);
+    }
+
 
 }
