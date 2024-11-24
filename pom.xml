@@ -15,6 +15,7 @@
     <description>spring-rest</description>
     <properties>
         <java.version>21</java.version>
+        <outputDirectory>${project.build.directory}</outputDirectory>
     </properties>
     <dependencies>
         <dependency>
@@ -46,6 +47,7 @@
                             <artifactId>lombok</artifactId>
                         </exclude>
                     </excludes>
+                    <outputDirectory>${outputDirectory}</outputDirectory>
                 </configuration>
             </plugin>
             <plugin>
@@ -57,7 +59,37 @@
                     <consoleOutput>true</consoleOutput>
                 </configuration>
             </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-jar-plugin</artifactId>
+                <version>3.3.0</version>
+                <configuration>
+                    <outputDirectory>${outputDirectory}</outputDirectory>
+                </configuration>
+            </plugin>
+
         </plugins>
     </build>
+    <profiles>
+        <profile>
+            <id>release</id>
+            <properties>
+                <outputDirectory>artifacts</outputDirectory>
+            </properties>
+            <build>
+                <plugins>
+                    <plugin>
+                        <groupId>org.apache.maven.plugins</groupId>
+                        <artifactId>maven-compiler-plugin</artifactId>
+                        <configuration>
+                            <source>1.8</source>
+                            <target>1.8</target>
+                            <optimize>true</optimize>
+                        </configuration>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
+    </profiles>
 
 </project>
