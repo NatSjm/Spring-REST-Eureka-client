@@ -43,8 +43,3 @@ jobs:
 
       - name: Checkstyle check
         run: mvn checkstyle:check
-
-      - uses: actions/upload-artifact@v4
-        with:
-          name: sr-artifact
-          path: artifact/
