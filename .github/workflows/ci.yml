@@ -26,3 +26,8 @@ jobs:
       - name: Publish application
         run:  mvn clean package -Prelease -DskipTests -DoutputDirectory=artifacts
 
+      - uses: actions/upload-artifact@v4
+        with:
+          name: sr-artifact
+          path: artifacts/
+
